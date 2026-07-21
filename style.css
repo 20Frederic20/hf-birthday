@@ -1,21 +1,19 @@
-/* Réinitialisation de base */
+/* Réinitialisation */
 * {
     margin: 0;
     padding: 0;
-    box-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-/* Couleurs ternes, douces et informatiques */
+/* Palette de couleurs ternes et softs */
 :root {
-    --bg-color: #1e1e24;       /* Noir/gris doux, style éditeur de code */
-    --card-bg: #2a2a32;        /* Gris un peu plus clair pour détacher la carte */
-    --text-main: #dedec2;      /* Blanc cassé/terne très doux pour les yeux */
-    --text-muted: #a0a0aa;     /* Gris moyen pour les sous-titres */
-    --accent-yellow: #e5c158;  /* Jaune désaturé, terne, style "or vieux" ou "sable" */
-    
-    /* Couleurs du code */
-    --code-keyword: #e57c63;
-    --code-string: #98be65;
+    --bg-color: #1b1b1f;        /* Fond anthracite très sombre et doux */
+    --card-bg: #232329;         /* Gris ardoise pour détacher la carte */
+    --diag-bg: #17171c;         /* Fond du bloc diagnostic */
+    --text-main: #d5d5c9;       /* Blanc cassé mat / crème terne */
+    --text-muted: #8c8c96;      /* Gris atténué pour les détails */
+    --accent-yellow: #dbb756;   /* Jaune sable désaturé (sobre et chaleureux) */
+    --status-green: #4ca66b;    /* Vert doux pour les indicateurs stables */
 }
 
 body {
@@ -29,101 +27,128 @@ body {
     padding: 20px;
 }
 
-/* Conteneur principal style carte/application */
+/* Carte principale style "Fiche technique / Équipement pro" */
 .card-container {
     background-color: var(--card-bg);
     width: 100%;
-    max-width: 600px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-width: 550px;
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
     overflow: hidden;
-    border: 1px solid #3a3a45;
+    border: 1px solid #2f2f38;
 }
 
-/* Faux terminal en haut */
-.terminal-header {
-    background-color: #222229;
-    padding: 12px;
+/* En-tête Maintenance */
+.maintenance-header {
+    background-color: #17171c;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #2f2f38;
+}
+
+.status-indicator {
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #3a3a45;
+    gap: 8px;
 }
 
-.dot {
-    width: 12px;
-    height: 12px;
+/* Petit point lumineux vert stable */
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--status-green);
     border-radius: 50%;
-    margin-right: 8px;
-    display: inline-block;
 }
-/* Clin d'oeil très discret aux couleurs rasta mais version terne/pastelle */
-.dot.red { background-color: #cd6155; }
-.dot.yellow { background-color: #d4ac0d; }
-.dot.green { background-color: #27ae60; }
 
-.terminal-title {
-    font-family: 'Fira Code', monospace;
-    font-size: 0.85rem;
+.status-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--status-green);
+    letter-spacing: 0.5px;
+}
+
+.ticket-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
     color: var(--text-muted);
-    margin-left: 10px;
 }
 
-.terminal-body {
-    font-family: 'Fira Code', monospace;
-    padding: 20px 25px;
-    background-color: #1a1a20;
-    font-size: 0.9rem;
-    border-bottom: 1px solid #3a3a45;
+/* Zone Diagnostic / Hardware */
+.diagnostic-box {
+    background-color: var(--diag-bg);
+    padding: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    border-bottom: 1px solid #2f2f38;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
-.keyword { color: var(--code-keyword); }
-.string { color: var(--code-string); }
-.number { color: var(--accent-yellow); }
+.diag-item {
+    display: flex;
+    justify-content: space-between;
+}
 
-/* Contenu Principal */
+.diag-item .label {
+    color: var(--text-muted);
+}
+
+.diag-item .value {
+    color: var(--text-main);
+}
+
+.diag-item .value.stable {
+    color: var(--accent-yellow);
+    font-weight: 500;
+}
+
+/* Corps du message principal */
 .main-content {
     padding: 40px 30px;
     text-align: center;
 }
 
 h1 {
-    font-size: 2.2rem;
+    font-size: 2.1rem;
     color: var(--accent-yellow);
     font-weight: 600;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     letter-spacing: -0.5px;
 }
 
 .subtitle {
     color: var(--text-muted);
-    font-size: 1rem;
-    margin-bottom: 25px;
+    font-size: 0.95rem;
+    margin-bottom: 30px;
 }
 
 .divider {
     height: 1px;
-    width: 60px;
+    width: 40px;
     background-color: var(--accent-yellow);
     margin: 0 auto 30px auto;
-    opacity: 0.5;
+    opacity: 0.4;
 }
 
 /* Citation Bob Marley */
 .marley-quote {
     font-style: italic;
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     color: var(--text-main);
-    line-height: 1.6;
+    line-height: 1.5;
     margin-bottom: 30px;
-    padding: 0 10px;
 }
 
 .marley-quote cite {
     display: block;
     font-style: normal;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--accent-yellow);
-    margin-top: 8px;
+    margin-top: 6px;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -134,25 +159,25 @@ h1 {
     line-height: 1.6;
 }
 
-/* Bas de page */
+/* Pied de page */
 .card-footer {
-    padding: 15px;
-    text-align: right;
-    background-color: #222229;
-    font-family: 'Fira Code', monospace;
-    font-size: 0.8rem;
-    color: #4f4f5e;
+    padding: 12px 20px;
+    background-color: #17171c;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: #4b4b54;
+    text-align: center;
 }
 
-/* Responsive pour les petits écrans */
+/* Responsive */
 @media (max-width: 480px) {
     .main-content {
         padding: 30px 20px;
     }
     h1 {
-        font-size: 1.8rem;
+        font-size: 1.7rem;
     }
-    .marley-quote {
-        font-size: 1rem;
+    .diagnostic-box {
+        font-size: 0.75rem;
     }
 }
