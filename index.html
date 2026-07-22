@@ -40,8 +40,20 @@
             <!-- Citation Bob Marley -->
             <blockquote class="marley-quote">
                 "Love the life you live. Live the life you love."
-                <cite>— Bob Marley</cite>
+                <cite>— Bob Marley (One Love)</cite>
             </blockquote>
+
+            <!-- Élément Audio invisible configuré en Autoplay + Loop -->
+            <audio id="bgMusic" autoplay loop preload="auto">
+                <source src="bob-marley.mp3" type="audio/mpeg">
+                Votre navigateur ne supporte pas l'élément audio.
+            </audio>
+
+            <!-- Statut audio épuré et automatique -->
+            <div id="audioStatus" class="audio-status-bar">
+                <span class="status-icon">🔊</span>
+                <span id="statusText" class="status-text">Ambiance sonore : Chargement...</span>
+            </div>
 
             <!-- Message ciblé Maintenance -->
             <div class="personal-note">
@@ -54,6 +66,37 @@
             <p>Rapport validé • Zéro anomalie détectée</p>
         </div>
     </div>
+
+    <!-- Script d'Auto-Déclenchement -->
+    <script>
+        const audio = document.getElementById('bgMusic');
+        const statusText = document.getElementById('statusText');
+
+        function startAudio() {
+            audio.play().then(() => {
+                statusText.textContent = "Ambiance sonore : Bob Marley - One Love (En lecture)";
+                statusText.style.color = "var(--accent-yellow)";
+            }).catch(() => {
+                statusText.textContent = "Cliquez n'importe où sur la page pour activer le son 🎵";
+            });
+        }
+
+        window.addEventListener('load', startAudio);
+
+        const unlockAudio = () => {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    statusText.textContent = "Ambiance sonore : Bob Marley - One Love (En lecture)";
+                    statusText.style.color = "var(--accent-yellow)";
+                });
+            }
+            document.removeEventListener('click', unlockAudio);
+            document.removeEventListener('touchstart', unlockAudio);
+        };
+
+        document.addEventListener('click', unlockAudio);
+        document.addEventListener('touchstart', unlockAudio);
+    </script>
 
 </body>
 </html>
