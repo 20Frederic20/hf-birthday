@@ -43,17 +43,20 @@
                 <cite>— Bob Marley (One Love)</cite>
             </blockquote>
 
-            <!-- Élément Audio invisible configuré en Autoplay + Loop -->
-            <audio id="bgMusic" autoplay loop preload="auto">
+            <!-- Lecteur Audio manuel -->
+            <div class="audio-player-box">
+                <div class="audio-info">
+                    <span class="audio-icon">🎵</span>
+                    <span class="audio-title">Bob Marley - One Love</span>
+                </div>
+                <button id="musicToggle" class="audio-btn">▶ Jouer l'ambiance</button>
+            </div>
+
+            <!-- Élément Audio configuré en boucle -->
+            <audio id="bgMusic" loop preload="auto">
                 <source src="bob-marley.mp3" type="audio/mpeg">
                 Votre navigateur ne supporte pas l'élément audio.
             </audio>
-
-            <!-- Statut audio épuré et automatique -->
-            <div id="audioStatus" class="audio-status-bar">
-                <span class="status-icon">🔊</span>
-                <span id="statusText" class="status-text">Ambiance sonore : Chargement...</span>
-            </div>
 
             <!-- Message ciblé Maintenance -->
             <div class="personal-note">
@@ -67,35 +70,22 @@
         </div>
     </div>
 
-    <!-- Script d'Auto-Déclenchement -->
+    <!-- Script de gestion du bouton Play/Pause -->
     <script>
         const audio = document.getElementById('bgMusic');
-        const statusText = document.getElementById('statusText');
+        const btn = document.getElementById('musicToggle');
 
-        function startAudio() {
-            audio.play().then(() => {
-                statusText.textContent = "Ambiance sonore : Bob Marley - One Love (En lecture)";
-                statusText.style.color = "var(--accent-yellow)";
-            }).catch(() => {
-                statusText.textContent = "Cliquez n'importe où sur la page pour activer le son 🎵";
-            });
-        }
-
-        window.addEventListener('load', startAudio);
-
-        const unlockAudio = () => {
+        btn.addEventListener('click', function() {
             if (audio.paused) {
-                audio.play().then(() => {
-                    statusText.textContent = "Ambiance sonore : Bob Marley - One Love (En lecture)";
-                    statusText.style.color = "var(--accent-yellow)";
-                });
+                audio.play();
+                btn.textContent = '⏸ Pause';
+                btn.classList.add('playing');
+            } else {
+                audio.pause();
+                btn.textContent = '▶ Jouer l\'ambiance';
+                btn.classList.remove('playing');
             }
-            document.removeEventListener('click', unlockAudio);
-            document.removeEventListener('touchstart', unlockAudio);
-        };
-
-        document.addEventListener('click', unlockAudio);
-        document.addEventListener('touchstart', unlockAudio);
+        });
     </script>
 
 </body>
